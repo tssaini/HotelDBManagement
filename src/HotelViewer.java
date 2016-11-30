@@ -44,17 +44,40 @@ public class HotelViewer extends JFrame{
 	
 	public void initInsert(){
 		insertQ = new ArrayList<String>();
-		insertQ.add("insert into bill(bill_status, bill_date, bill_id, reservation_id, guest_id) values ('P', '02-JAN-16',	1, 1,	1)");
+		//bill
+		insertQ.add("insert into bill(bill_status, bill_date, bill_id, reservation_id, guest_id) values ('P', '16-JAN-02',	1, 1,	1)");
+		insertQ.add("insert into bill(bill_status, bill_date, bill_id, reservation_id, guest_id) values ('P', '16-JAN-04',	2, 2,	2)");
+		insertQ.add("insert into bill(bill_status, bill_date, bill_id, reservation_id, guest_id) values ('U', '16-JAN-06',	6, 6,	6)");
+		
+		//guest
 		insertQ.add("insert into guest(phone_number, last_name, first_name, email_address, guest_id, reservation_id) values ('1234567890','Davis','Mike','mike1@gmail.com',1,1)");
-		insertQ.add("insert into rooms(hotel_id, guest_id, status, room_type, room_number) values (12,1,	'B',	'Double',	2)");
-		insertQ.add("insert into reservation(checkin, checkout, guest_id, reservation_id) values ('02-JAN-16',	'09-JAN-16',	1,	1)");
+		insertQ.add("insert into guest(phone_number, last_name, first_name, email_address, guest_id, reservation_id) values ('1235556789','Escobar','John','john@gmail.com',2,2)");
+		insertQ.add("insert into guest(phone_number, last_name, first_name, email_address, guest_id, reservation_id) values ('9119119112','Escobar','Pablo','pablo@gmail.com',6,6)");
+		
+		
+		//rooms
+		insertQ.add("insert into rooms(hotel_id, guest_id, status, room_type, room_number) values (1,1,'B','Double',2)");
+		insertQ.add("insert into rooms(hotel_id, guest_id, status, room_type, room_number) values (1,2,'B','Double',5)");
+		insertQ.add("insert into rooms(hotel_id, guest_id, status, room_type, room_number) values (1,6,'B','Double',6)");
+		
+		
+		//reservation
+		insertQ.add("insert into reservation(checkin, checkout, guest_id, reservation_id) values ('16-JAN-02','16-JAN-09',1,1)");
+		insertQ.add("insert into reservation(checkin, checkout, guest_id, reservation_id) values ('04-JAN-16','16-JAN-07',2,2)");
+		insertQ.add("insert into reservation(checkin, checkout, guest_id, reservation_id) values ('16-JAN-06','16-JAN-09',6,6)");
+
+		
+		//parking
 		insertQ.add("insert into parking(parking_status, spot_number, guest_id) values ('B',	1,	1)");
+		
+		
+		//hotel
 		insertQ.add("insert into hotel(hotel_id, name, location) values (1,	'Supreme Time Resort',	'New York, USA')");
 	}
 	
 	public void initSelect(){
 		selectQ = new ArrayList<String>();
-		selectQ.add("select * from bill where bill_date between '02-JAN-16' and '05-JAN-16' order by bill_date desc");
+		selectQ.add("select * from bill where bill_date between '16-JAN-02' and '16-JAN-05' order by bill_date desc");
 		selectQ.add("select g.first_name, g.last_name, h.name, r.room_number from guest g, hotel h, rooms r where g.guest_id = r.guest_id and h.hotel_id = r.hotel_id");
 		selectQ.add("select * from guest where GUEST_ID between 5 and 9");
 		selectQ.add("select guest.first_name, guest.last_name, guest.guest_id, bill.bill_status, bill.bill_id from bill inner join guest on guest.guest_id = bill.guest_id where bill.bill_status = 'U'");
